@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+  - source: my_script.py
+    destination: /usr/bin/pythonscript
+permissions:
+  - object: /usr/bin/pythonscript/my_script.py
+    pattern: 755
+hooks:
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 300
+      runas: ec2-user
