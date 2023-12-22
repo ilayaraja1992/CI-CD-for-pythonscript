@@ -1,13 +1,18 @@
 version: 0.0
 os: linux
 files:
-  - source: my_script.py
-    destination: /usr/bin/pythonscript
-permissions:
-  - object: /usr/bin/pythonscript/my_script.py
-    pattern: 755
+  - source: /
+    destination: /usr/bin/pythonscript/my_script.py
 hooks:
+  BeforeInstall:
+    - location: scripts/beforeinstall.sh
+      timeout: 300
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/afterinstall.sh
+      timeout: 300
+      runas: ec2-user
   ApplicationStart:
-    - location: scripts/application_start.sh
+    - location: scripts/applicationstart.sh
       timeout: 300
       runas: ec2-user
